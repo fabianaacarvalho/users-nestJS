@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Favorites } from '../../favorites/entities/favorite.entity';
 
 @Entity({ name: 'users' })
 export class Users {
@@ -25,4 +27,7 @@ export class Users {
 
   @UpdateDateColumn({ name: 'updated_at' })
   UpdatedAt: Date;
+
+  @OneToMany(() => Favorites, (favorite) => favorite.user)
+  favorites: Favorites[];
 }
